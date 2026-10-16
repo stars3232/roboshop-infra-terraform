@@ -1,7 +1,7 @@
 module frontend_sg {
     source = "git::https://github.com/stars3232/terraform-aws-sg.git?ref=main"
-    project         = "roboshop"
-    environment     = "dev"
+    project         = var.project
+    environment     = var.environment
     sg_name         = "frontend"
     sg_description  = "security group for frontend component of roboshop"
     vpc_id          = nonsensitive(data.aws_ssm_parameter.vpc_id.value)
@@ -10,8 +10,8 @@ module frontend_sg {
 
 module bastion_sg {
     source = "git::https://github.com/stars3232/terraform-aws-sg.git?ref=main"
-    project         = "roboshop"
-    environment     = "dev"
+    project         = var.project
+    environment     = var.environment
     sg_name         = "bastion"
     sg_description  = "security group for bastion instance"
     vpc_id          = nonsensitive(data.aws_ssm_parameter.vpc_id.value)
