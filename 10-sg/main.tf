@@ -43,5 +43,5 @@ resource "aws_security_group_rule" "bastion_backend_alb" {
   to_port           = 80
   protocol          = "tcp"
   source_security_group_id =  module.bastion_sg.sg_id
-  security_group_id = module.bastion_sg.sg_id
+  security_group_id = module.backend_alb_sg.sg_id
 }
