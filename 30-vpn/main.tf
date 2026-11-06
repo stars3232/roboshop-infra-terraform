@@ -1,0 +1,12 @@
+resource "aws_instance" "bastion" {
+  ami           = data.aws_ami.openvpn.id
+  instance_type = "t3.micro"
+  vpc_security_group_ids = nonsensitive([data.aws_ssm_parameter.vpn_sg_id.value])
+  subnet_id     = nonsensitive(split(",",data.aws_ssm_parameter.public_subnet_id.value)[0])
+  key_name = "vpn-key"
+  user_data = file("openvpn.sh")
+
+  tags = merge(local.common_tags,{
+          Name = "${var.project}-${var.environment}-vpn"
+  })
+}
