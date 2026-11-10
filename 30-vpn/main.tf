@@ -1,4 +1,4 @@
-resource "aws_instance" "bastion" {
+resource "aws_instance" "vpn" {
   ami           = data.aws_ami.openvpn.id
   instance_type = "t3.micro"
   vpc_security_group_ids = nonsensitive([data.aws_ssm_parameter.vpn_sg_id.value])
